@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  redis-master:
+    image: k8s.gcr.io/redis:e2e 
+    ports:
+      - "6379"
+
+  redis-node:
+    image: gcr.io/google_samples/gb-redisslave:v1
+    ports:
+      - "6379"
+
+  frontend:
+    image: gcr.io/google-samples/gb-frontend:v4
+    ports:
+      - "80:80"
+
+    labels:
+      kompose.service.type: LoadBalancer
